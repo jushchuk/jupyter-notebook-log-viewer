@@ -1,0 +1,34 @@
+/*general css for flexbox*/
+
+.row {
+	display: flex;
+	padding: 5px;
+	margin: 5px;
+}
+
+.column {
+	flex: 50%;
+	padding: 5px;
+	margin: 5px;
+}
+
+/*toolbar css*/
+
+#toolbar {
+	text-align: center;
+}
+
+#viewer_controls {
+	text-align: center;
+}
+
+/*viewer css*/
+pre {
+	white-space:pre-wrap;
+}
+
+.correct {
+	background-color: LightGreen;
+}
+
+

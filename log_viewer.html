@@ -1,0 +1,60 @@
+<html>
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="styles/vs.css">
+<script src="scripts/highlight.min.js"></script>
+<link rel="stylesheet" type="text/css" href="styles/main.css">
+<script type="text/javascript" src="scripts/jquery-3.3.1.min.js"></script>
+<script type="text/javascript" src="scripts/log_viewer.js"></script>
+</head>
+<title>Jupyter Notebook Log Viewer</title>
+
+
+
+
+
+</head>
+
+<body>
+
+	<div id=toolbar class="row">
+		<div id="file_loader" class="column"><input type="file" id="file_upload" name="file" /></div>
+		<div id="question_select_div" class ="column">Question:</div>
+		<div id="user_select_div" class="column">User:</div>
+		<div id="layout_select_div" class="column"><button id="layout_button" type="button">Toggle Layout (t key)</button></div>
+	</div> 
+	
+	<div id=viewer_controls class="row">
+		<div id=control_left class="column control"><button id="turn_left_button" type="button">Prev (Left arrow key)</button></div>
+		<div id=control_center class="column control">Jump To:<select id="jump_select"/></select></div>
+		<div id=control_right class="column control"><button id="turn_right_button" type="button">Next (Right arrow key)</button></div>
+	</div> 
+	
+	<div id=viewer class="row">
+		<div id=page_left class="column page">
+			<div class="row work">
+				<pre><code id=page_left_work class="python">
+Work will go here
+				</code></pre>
+			</div>
+			<div class="row output">
+				<pre><code id=page_left_output class="python">
+Output will go here
+				</code></pre>
+			</div>
+		</div>
+		<div id=page_right class="column page">
+			<div class="row work">
+				<pre><code id=page_right_work class="python">
+Work/Output will go here
+				</code></pre>
+			</div>
+			<div class="row output">
+				<pre><code id=page_right_output class="python">
+Output will go here
+				</code></pre>
+			</div>
+		</div>
+	</div> 
+</body>
+</html>
