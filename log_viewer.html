@@ -19,9 +19,15 @@
 
 	<div id=toolbar class="row">
 		<div id="file_loader" class="column"><input type="file" id="file_upload" name="file" /></div>
+		<div id="file_exporter" class ="column">
+			<input type="text" id=file_export_name placeholder="filename"/>
+			<button type="button" id="file_export">Export</button>
+		</div>
 		<div id="question_select_div" class ="column">Question:</div>
 		<div id="user_select_div" class="column">User:</div>
+		<div id="render_select_div" class="column"><input type=checkbox id="render_checkbox" checked>Render as Code</input></div>
 		<div id="layout_select_div" class="column"><button id="layout_button" type="button">Toggle Layout (t key)</button></div>
+		
 	</div> 
 	
 	<div id=viewer_controls class="row">
@@ -32,28 +38,17 @@
 	
 	<div id=viewer class="row">
 		<div id=page_left class="column page">
-			<div class="row work">
-				<pre><code id=page_left_work class="python">
-Work will go here
-				</code></pre>
-			</div>
-			<div class="row output">
-				<pre><code id=page_left_output class="python">
-Output will go here
-				</code></pre>
-			</div>
+			<div id=page_left_work class="row work">Work will go here</div>
+			<div id=page_left_output class="row output">Output will go here</div>
 		</div>
 		<div id=page_right class="column page">
-			<div class="row work">
-				<pre><code id=page_right_work class="python">
-Work/Output will go here
-				</code></pre>
-			</div>
-			<div class="row output">
-				<pre><code id=page_right_output class="python">
-Output will go here
-				</code></pre>
-			</div>
+			<div id=page_right_work class="row work">Work will go here</div>
+			<div id=page_right_output class="row output">Output will go here</div>
+		</div>
+		<div id=tag_controls class="column">
+			<div id=tag_checkbox_div></div>
+			<input type="text" id=tag_input placeholder="new tag"/>
+			<button id="tag_button" type="button">Add tag</button>
 		</div>
 	</div> 
 </body>
