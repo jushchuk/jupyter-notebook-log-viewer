@@ -132,6 +132,21 @@ function populateToolbar(){
 		}
 	});
 	
+	$('#details_button').on('click', function(){
+		createDetails();
+	});
+	
+	$('#details_input').on('keydown', function(e){
+		if (e.which == 13){
+			createDetails();
+		}
+	});
+
+	$('#details_remove_button').on('click', function(){
+		confirm('Remove the details for this checkpoint?');
+		removeDetails();
+	});
+	
 	$('#render_checkbox').on('change', function(){
 		console.log($('#render_checkbox').prop('checked'));
 		var keep_position = true;
@@ -290,6 +305,8 @@ function populateView(keep_position){
 	
 	populateTagControls();
 	
+	populateDetails();
+	
 	$('#jump_select').val(current_checkpoint);
 
 	$('pre code').each(function(i, e) {hljs.highlightBlock(e)});
@@ -323,6 +340,22 @@ function populateTagControls(){
 	}
 }
 
+function populateDetails(){
+	//populate tag controls
+	$('#details').html('');
+	if (logs != null){
+		var checkpoint_details = getCurrentCheckpoint()['details'];
+		
+		//populate the details
+		if (checkpoint_details == null || checkpoint_details.length == 0){
+			$('#details').text('Details Empty');
+		} else {
+			$('#details').text(checkpoint_details);
+		}
+	}
+	
+}
+
 function updateTag(tag_id){
 	console.log(tag_id+'\n'+$(tag_id).prop('checked')+'\n'+$(tag_id).val());
 	
@@ -345,24 +378,50 @@ function updateTag(tag_id){
 function createTag(){
 	var new_tag = $.trim($('#tag_input').val());
 	if (new_tag != ''){
+		new_tag = new_tag.split(' ').join('_');
+		new_tag = new_tag.replace(/\W/g, '')
 		if (logs != null){
-			console.log(logs['all_tags']);
 			if (logs['all_tags'] == null){
 				logs['all_tags'] = [];
 			}
 			if (!logs['all_tags'].includes(new_tag)){
 				logs['all_tags'].push(new_tag);
 			}
-			console.log(logs['all_tags']);
-			$('#tag_input').val('');
 			populateTagControls();
 		}
-	} else {
-		$('#tag_input').val('');
+	}
+	$('#tag_input').val('');
+}
+
+function createDetails(){
+	var details = $.trim($('#details_input').val());
+	if (details != ''){
+		if (logs != null){
+			var checkpoint = getCheckpoints()[current_checkpoint];
+			var old = checkpoint['details'];
+			if (old == null){
+				checkpoint['details'] = details;
+			} else {
+				checkpoint['details'] = old + ', ' + details;
+			}
+			console.log(checkpoint['details']);
+			populateDetails();
+		}
+	}
+	$('#details_input').val('');
+}
+
+function removeDetails(){
+	if (logs != null){
+		var checkpoint = getCheckpoints()[current_checkpoint];
+		checkpoint['details'] = null;
+		console.log(checkpoint['details']);
+		populateDetails();
 	}
 }
 
 function exportFile(){
+	console.log('exporting');
 	if (logs != null){
 		var new_filename = null;
 		if ($('#file_export_name').val() == ''){
@@ -384,6 +443,7 @@ function download(content, fileName, contentType) {
     a.href = URL.createObjectURL(file);
     a.download = fileName;
     a.click();
+	//window.open(URL.createObjectURL(file));
 }
 
 function getCheckpoints(){
